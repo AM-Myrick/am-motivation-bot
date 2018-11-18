@@ -3,12 +3,12 @@ const TwitterBot = require("node-twitterbot").TwitterBot;
 const axios = require("axios");
 const url = "https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
 
-// const Bot = new TwitterBot({
-//  consumer_key: process.env.BOT_CONSUMER_KEY,
-//  consumer_secret: process.env.BOT_CONSUMER_SECRET,
-//  access_token: process.env.BOT_ACCESS_TOKEN,
-//  access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
-// });
+const Bot = new TwitterBot({
+ consumer_key: process.env.BOT_CONSUMER_KEY,
+ consumer_secret: process.env.BOT_CONSUMER_SECRET,
+ access_token: process.env.BOT_ACCESS_TOKEN,
+ access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
+});
 
 const newQuote = () => {
     // function to grab a quote from the api and pass it to be checked
@@ -45,8 +45,7 @@ const quoteChecker = (quote) => {
 }
 
 const tweetQuote = (quote) => {
-    // Bot.tweet(quote);
-    console.log(quote)
+    Bot.tweet(quote);
 }
 
 newQuote();
