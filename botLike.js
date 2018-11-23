@@ -22,7 +22,7 @@ const Bot = new Twit({
     access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 });
 
-Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 10 }, function(err, data, response) {
+Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 3 }, function(err, data, response) {
     data.statuses.map(tweet => {
         Bot.post('favorites/create', { id: tweet.id_str }, liked);
 
