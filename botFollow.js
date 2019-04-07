@@ -10,9 +10,9 @@ const Bot = new Twit({
 
 // searches for 100 tweets since yesterday with the motivation hashtag
 // once the tweets are grabbed, all posters are followed
-Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 100 })
-    .then(data => {
-        data.statuses.map(tweet => {
+Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 50 })
+    .then(res => {
+        res.data.statuses.map(tweet => {
             Bot.post('friendships/create', { id: tweet.user.id_str })
                 .then(tweet => console.log('Followed: ' + tweet.id))
                 .catch(err => console.log("Error: " + err.message))
