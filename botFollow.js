@@ -8,12 +8,14 @@ const Bot = new Twit({
     access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 });
 
-// likes 100 tweets posted since yesterday with the motivation hashtag
+// searches for 100 tweets since yesterday with the motivation hashtag
+// once the tweets are grabbed, all posters are followed
 Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 100 })
     .then(data => {
         data.statuses.map(tweet => {
-            Bot.post('favorites/create', { id: tweet.id_str })
-                .then(tweet => console.log('Liked: ' + tweet.id))
+            Bot.post('friendships/create', { id: tweet.user.id_str })
+                .then(tweet => console.log('Followed: ' + tweet.id))
                 .catch(err => console.log("Error: " + err.message))
         })
     })
+    .catch(err => console.log(err))

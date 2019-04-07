@@ -20,7 +20,7 @@ const newQuote = () => {
 const quoteChecker = (quote) => {
     // function checks if quote exists and formats it
     if (quote === undefined || quote.quoteAuthor === undefined) {
-        newQuote();
+        return newQuote();
     }
     // replaces unicode characters
     let quoteText = quote.quoteText.replace(/\\u[\dA-F]{4}/gi, 
