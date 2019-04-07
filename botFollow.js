@@ -14,7 +14,7 @@ Bot.get('search/tweets', { q: `#motivation since:${yesterday}`, count: 50 })
     .then(res => {
         res.data.statuses.map(tweet => {
             Bot.post('friendships/create', { id: tweet.user.id_str })
-                .then(tweet => console.log('Followed: ' + tweet.id))
+                .then(tweet => console.log('Followed: ' + tweet.data.id))
                 .catch(err => console.log("Error: " + err.message))
         })
     })

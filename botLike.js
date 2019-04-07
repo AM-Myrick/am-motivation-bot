@@ -1,6 +1,5 @@
 const Twit = require("twit");
 const yesterday = require("./dateLogic").yesterday;
-let favorites = [];
 
 const Bot = new Twit({
     consumer_key: process.env.BOT_CONSUMER_KEY,
