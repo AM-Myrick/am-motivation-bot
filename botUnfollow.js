@@ -12,7 +12,7 @@ Bot.get("friends/list")
     .then(res => {
         res.data.users.slice(0,90).map(user => {
             Bot.post("friendships/destroy", {name: user.name, screen_name: user.screen_name})
-                .then(res => "Unfollowed: " + res.data.id)
+                .then(res => console.log("Unfollowed: " + res.data.id))
                 .catch(err => console.log(err))
         })
     })
