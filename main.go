@@ -58,15 +58,10 @@ func listenForMentions() {
 }
 
 func createTwitterClient() *twitter.Client {
-	fmt.Println("got here")
 	consumerKey := os.Getenv("BOT_CONSUMER_KEY")
-	fmt.Println("got here")
 	consumerSecret := os.Getenv("BOT_CONSUMER_SECRET")
-	fmt.Println("got here")
 	accessToken := os.Getenv("BOT_ACCESS_TOKEN")
-	fmt.Println("got here")
 	accessSecret := os.Getenv("BOT_ACCESS_TOKEN_SECRET")
-	fmt.Println("got here")
 
 	config := oauth1.NewConfig(consumerKey, consumerSecret)
 	token := oauth1.NewToken(accessToken, accessSecret)

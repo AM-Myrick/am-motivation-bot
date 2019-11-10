@@ -1,1 +1,1 @@
-worker: bin/am-motivation-bot production=true
+worker: bin/am-motivation-bot -production=true
