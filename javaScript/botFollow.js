@@ -1,5 +1,6 @@
 const Twit = require("twit");
 const yesterday = require("./dateLogic").yesterday;
+require('dotenv').config()
 
 const Bot = new Twit({
     consumer_key: process.env.BOT_CONSUMER_KEY,

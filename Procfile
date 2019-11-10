@@ -1,1 +1,1 @@
-worker: node botPost.js
+worker: node javaScript/botPost.js

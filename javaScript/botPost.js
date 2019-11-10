@@ -2,6 +2,7 @@ const Twit = require("twit");
 const TwitterBot = require("node-twitterbot").TwitterBot;
 const axios = require("axios");
 const url = "https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
+require('dotenv').config()
 
 const Bot = new TwitterBot({
  consumer_key: process.env.BOT_CONSUMER_KEY,
@@ -18,22 +19,16 @@ const newQuote = () => {
 }
 
 const quoteChecker = (quote) => {
-    // function checks if quote exists and formats it
+    // checks if quote exists and formats it
     if (quote === undefined || quote.quoteAuthor === undefined) {
         return newQuote();
     }
+    
     // replaces unicode characters
-    let quoteText = quote.quoteText.replace(/\\u[\dA-F]{4}/gi, 
-        function (match) {
-             return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-        })
+    const quoteText = quote.quoteText.replace(/\\u[\dA-F]{4}/gi, (match) => String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16)))
+    const quoteAuthor = quote.quoteAuthor.replace(/\\u[\dA-F]{4}/gi, (match) => String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16)))
     
-    let quoteAuthor = quote.quoteAuthor.replace(/\\u[\dA-F]{4}/gi, 
-        function (match) {
-             return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-        })
-    
-    let fullQuote = `"${quoteText}" - ${quoteAuthor}
+    const fullQuote = `"${quoteText}" - ${quoteAuthor}
 #Motivation #KeepGoing`;
     
     // makes sure incomplete tweets aren't posted

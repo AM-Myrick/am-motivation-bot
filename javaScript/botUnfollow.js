@@ -1,4 +1,5 @@
 const Twit = require("twit");
+require('dotenv').config()
 
 const Bot = new Twit({
     consumer_key: process.env.BOT_CONSUMER_KEY,
