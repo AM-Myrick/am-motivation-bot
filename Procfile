@@ -1,1 +1,1 @@
-worker: ./am-motivation-bot
+worker: bin/am-motivation-bot
