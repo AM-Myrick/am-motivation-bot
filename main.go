@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
@@ -38,7 +39,8 @@ func listenForMentions() {
 	client := createTwitterClient()
 	demux := twitter.NewSwitchDemux()
 	demux.Tweet = func(tweet *twitter.Tweet) {
-		if tweet.InReplyToStatusID != 0 {
+		fmt.Println("Mentioned.")
+		if tweet.InReplyToStatusID != 0 && parseTweet(tweet) == true {
 			retweetTweet(tweet.InReplyToStatusID, client)
 		}
 	}
@@ -73,4 +75,16 @@ func createTwitterClient() *twitter.Client {
 
 func retweetTweet(tweetID int64, client *twitter.Client) {
 	client.Statuses.Retweet(tweetID, nil)
+	result := fmt.Sprintf("Retweeted %d.", tweetID)
+	fmt.Println(result)
+}
+
+func parseTweet(tweet *twitter.Tweet) bool {
+	tweetSlice := strings.Split(tweet.Text, " ")
+	username := strings.ToLower(tweetSlice[0])
+
+	if username == "@ammotivationbo2" {
+		return true
+	}
+	return false
 }
