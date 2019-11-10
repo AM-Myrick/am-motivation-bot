@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 
@@ -13,6 +14,7 @@ import (
 func main() {
 	listen := parseFlags()
 	if listen == true {
+		fmt.Println("Listening for mentions...")
 		listenForMentions()
 	}
 }
