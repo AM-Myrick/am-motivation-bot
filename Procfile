@@ -1,1 +1,1 @@
-worker: node javaScript/botPost.js
+worker: ./am-motivation-bot
