@@ -12,18 +12,26 @@ import (
 )
 
 func main() {
-	listen := parseFlags()
+	listen, production := parseFlags()
+	if production == false {
+		err := godotenv.Load()
+
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
 	if listen == true {
 		fmt.Println("Listening for mentions...")
 		listenForMentions()
 	}
 }
 
-func parseFlags() bool {
+func parseFlags() (bool, bool) {
 	listen := flag.Bool("listen", true, "a flag to make the bot listen for mentions of its handle")
+	production := flag.Bool("production", false, "a flag to make the program use heroku config variables")
 	flag.Parse()
 
-	return *listen
+	return *listen, *production
 }
 
 func listenForMentions() {
@@ -50,12 +58,6 @@ func listenForMentions() {
 }
 
 func createTwitterClient() *twitter.Client {
-	err := godotenv.Load()
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
 	consumerKey := os.Getenv("BOT_CONSUMER_KEY")
 	consumerSecret := os.Getenv("BOT_CONSUMER_SECRET")
 	accessToken := os.Getenv("BOT_ACCESS_TOKEN")
